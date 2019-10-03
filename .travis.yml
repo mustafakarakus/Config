@@ -1,14 +1,5 @@
 language: objective-c
-
 osx_image: xcode10.1
-env:
-  matrix:
-    - TEST_SDK=iphonesimulator12.1 OS=12.1 NAME='iPhone XR'
-    - TEST_SDK=iphonesimulator12.1 OS=12.1 NAME='iPhone 7'
-
-script:
-- xcodebuild -workspace Config.xcworkspace -scheme Config -sdk iphonesimulator12.1 -destination "platform=iOS Simulator,OS=12.1,name=iPhone Xs Max" -UseModernBuildSystem=NO test | xcpretty --test --color; test ${PIPESTATUS[0]} -eq 0
-
-  after_success:
-  - slather
-  - bash <(curl -s https://codecov.io/bash) -f reports/cobertura.xml -X coveragepy -X gcov -X xcode
+xcode_workspace: Config.xcworkspace
+xcode_scheme: Config
+xcode_sdk: iphonesimulator12.1
