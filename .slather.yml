@@ -1,0 +1,6 @@
+coverage_service: cobertura_xml
+xcodeproj: Config.xcodeproj
+scheme: Config
+output_directory: reports
+ignore:
+  - ConfigTests/*
