@@ -6,8 +6,7 @@
 //  Copyright © 2019 Mustafa Karakus. All rights reserved.
 //
 
-#import <UIKit/UIKit.h>
-
+#import <UIKit/UIKit.h> 
 //! Project version number for Config.
 FOUNDATION_EXPORT double ConfigVersionNumber;
 
