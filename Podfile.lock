@@ -1,0 +1,16 @@
+PODS:
+  - Config (0.0.1)
+
+DEPENDENCIES:
+  - Config
+
+SPEC REPOS:
+  trunk:
+    - Config
+
+SPEC CHECKSUMS:
+  Config: 871efa5ec1a2a7e1655f22391ab831af26827ebe
+
+PODFILE CHECKSUM: 339125a375c2860fce1f6b18ed64b40750a373c1
+
+COCOAPODS: 1.8.1
