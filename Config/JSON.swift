@@ -28,7 +28,7 @@ extension JSON : Decodable {
             .or((try? container.decode(Bool.self)).map(JSON.bool))
             .or((try? container.decode([String: JSON].self)).map(JSON.object))
             .or((try? container.decode([JSON].self)).map(JSON.array))
-            .resolve(with: DecodingError.typeMismatch(JSON.self, DecodingError.Context(codingPath: container.codingPath, debugDescription: "Not a JSON")))
+            .resolve(with: DecodingError.typeMismatch(JSON.self, DecodingError.Context(codingPath: container.codingPath, debugDescription: Messages.notValidJSON)))
     }
     
     public func parse<T>()->T?{
@@ -37,16 +37,16 @@ extension JSON : Decodable {
     
     public subscript(key: String) -> JSON {
         if case .object(let dict) = self {
-            return dict[key] ?? JSON.errorWith("Config.framework.log ===> '\(key)' does not exists! ")
+            return dict[key] ?? JSON.errorWith("\(Messages.keyDoesNotExists) - '\(key)'")
         }
-        return JSON.errorWith("Config.framework.log ===> JSON format is not valid")
+        return JSON.errorWith(Messages.notValidJSON)
     }
     
     public subscript(dynamicMember member: String) -> JSON {
         if case .object(let dict) = self {
-            return dict[member] ?? JSON.errorWith("Config.framework.log ===> \(member) does not exists! ")
+            return dict[member] ?? JSON.errorWith("\(Messages.keyDoesNotExists) - '\(member)'")
         }
-        return JSON.errorWith("Config.framework.log ===> Can not reach '\(member)'")
+        return JSON.errorWith("\(Messages.cannotReach) - '\(member)'")
     }
     
     func getValue(json:JSON) -> Any {

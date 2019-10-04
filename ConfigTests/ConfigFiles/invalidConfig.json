@@ -1,9 +1,0 @@
-{
-    "development": {
-        "debug": true
-    },
-    "application": {
-        "type":5,
-        "version": 1.2,
-        "appKey": "ABCD-EFGH-IJKLMNOPR",
-        "security

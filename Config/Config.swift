@@ -36,7 +36,7 @@ public class Config {
     private func readConfig(){
         let filePath = pathForResource(name: self.configFile, ofType: nil)
         guard let file = filePath else {
-            _ = JSON.errorWith("Config.framework.log ===> \(self.config) not found.")
+            _ = JSON.errorWith("\(Messages.notFound) \(self.config)") 
             return
         }
         do {
@@ -44,10 +44,10 @@ public class Config {
             if let response = try? JSONDecoder().decode(JSON.self, from: data) {
                 properties = response
             }else{
-                _ = JSON.errorWith("Config.framework.log ===> \(file) is not valid JSON")
+                _ = JSON.errorWith("\(Messages.notValidJSON) \(file)")
             }
         } catch {
-            print("error")
+            _ = JSON.errorWith("\(Messages.notValidJSON) \(file)")
         }
     }
     
@@ -56,6 +56,6 @@ public class Config {
             let val = properties[member]
             return val
         }
-        return JSON.error("Config.framework.log ===> Please check your config file. Is not exists or not valid json.")
+        return JSON.error(Messages.checkJSONFile)
     }
 } 
