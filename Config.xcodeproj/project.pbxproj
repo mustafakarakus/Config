@@ -19,6 +19,8 @@
 		45424D692346A2840096337E /* JSON.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45424D682346A2840096337E /* JSON.swift */; };
 		45424D6B2346A3880096337E /* Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45424D6A2346A3880096337E /* Extensions.swift */; };
 		45424D702346A7ED0096337E /* config.json in Resources */ = {isa = PBXBuildFile; fileRef = 45424D6F2346A7ED0096337E /* config.json */; };
+		458BE1EB23472C9B00920DEA /* Config.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 45424D35234691C80096337E /* Config.framework */; };
+		458BE1EC23472C9B00920DEA /* Config.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 45424D35234691C80096337E /* Config.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		5F9F88AB52B5A025D6DEECEE /* Pods_Config.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D0AC0ADF88B9E92AC8F4C3C9 /* Pods_Config.framework */; };
 		A989693D4C49E03AE74CE3B6 /* Pods_Config_ConfigTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 704EEC0054CBCE6479343C44 /* Pods_Config_ConfigTests.framework */; };
 		B3A539EC7C777E4A8720C9A3 /* Pods_ConfigExamples.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 32DC7A1C33EC25BA238711E5 /* Pods_ConfigExamples.framework */; };
@@ -32,7 +34,28 @@
 			remoteGlobalIDString = 45424D34234691C80096337E;
 			remoteInfo = Config;
 		};
+		458BE1ED23472C9B00920DEA /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 45424D2C234691C80096337E /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 45424D34234691C80096337E;
+			remoteInfo = Config;
+		};
 /* End PBXContainerItemProxy section */
+
+/* Begin PBXCopyFilesBuildPhase section */
+		458BE1EF23472C9B00920DEA /* Embed Frameworks */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 10;
+			files = (
+				458BE1EC23472C9B00920DEA /* Config.framework in Embed Frameworks */,
+			);
+			name = "Embed Frameworks";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
 		32DC7A1C33EC25BA238711E5 /* Pods_ConfigExamples.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_ConfigExamples.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -85,6 +108,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				458BE1EB23472C9B00920DEA /* Config.framework in Frameworks */,
 				B3A539EC7C777E4A8720C9A3 /* Pods_ConfigExamples.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -240,10 +264,12 @@
 				45424D4F234691D80096337E /* Sources */,
 				45424D50234691D80096337E /* Frameworks */,
 				45424D51234691D80096337E /* Resources */,
+				458BE1EF23472C9B00920DEA /* Embed Frameworks */,
 			);
 			buildRules = (
 			);
 			dependencies = (
+				458BE1EE23472C9B00920DEA /* PBXTargetDependency */,
 			);
 			name = ConfigExamples;
 			productName = ConfigExamples;
@@ -424,6 +450,11 @@
 			isa = PBXTargetDependency;
 			target = 45424D34234691C80096337E /* Config */;
 			targetProxy = 45424D40234691C80096337E /* PBXContainerItemProxy */;
+		};
+		458BE1EE23472C9B00920DEA /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 45424D34234691C80096337E /* Config */;
+			targetProxy = 458BE1ED23472C9B00920DEA /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
 
@@ -674,6 +705,7 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 67DE006B9C37BEFE6D096EFE /* Pods-ConfigExamples.debug.xcconfig */;
 			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = QT969TVAQW;
@@ -693,6 +725,7 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 686B80249A280364EF462CCC /* Pods-ConfigExamples.release.xcconfig */;
 			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = QT969TVAQW;
