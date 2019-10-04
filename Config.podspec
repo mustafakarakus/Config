@@ -1,8 +1,8 @@
 Pod::Spec.new do |spec|
 
   spec.name         = "Config"
-  spec.version      = "0.0.3"
-  spec.summary      = "Read JSON with dot notation in your App as a configuration, written in Swift"
+  spec.version      = "0.0.4"
+  spec.summary      = "Use a JSON file as an app configuration, reach keys with dot notation, written in Swift"
 
   spec.description  = <<-DESC
   Config is a framework written in Swift that makes it easy for you to use JSON file as a configuration, with JSON keys in dot notation in your application.
