@@ -20,6 +20,5 @@ target 'ConfigExamples' do
   use_frameworks!
 
   # Pods for ConfigExamples
-pod 'Config'
 
 end
