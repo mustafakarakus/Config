@@ -21,11 +21,20 @@ public class Config {
      }
     
     public static func initialize(configPath:String){
-        configFile = configPath
+        self.configFile = configPath
+    }
+     
+    private func pathForResource(name: String, ofType type: String?) -> String? {
+        for bundle in Bundle.allBundles {
+            if let path = bundle.path(forResource: name, ofType: type) {
+                return path
+            }
+        }
+        return nil
     }
     
     private func readConfig(){
-        let filePath = Bundle.main.path(forResource: self.configFile, ofType: nil)
+        let filePath = pathForResource(name: self.configFile, ofType: nil)
         guard let file = filePath else {
             _ = JSON.errorWith("Config.framework.log ===> \(self.config) not found.")
             return

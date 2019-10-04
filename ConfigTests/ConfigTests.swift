@@ -10,25 +10,65 @@ import XCTest
 @testable import Config
 
 class ConfigTests: XCTestCase {
-
+    
     override func setUp() {
-        // Put setup code here. This method is called before the invocation of each test method in the class.
+        Config.initialize(configPath: "mainConfig.json")
+        super.setUp()
     }
-
+    
     override func tearDown() {
-        // Put teardown code here. This method is called after the invocation of each test method in the class.
+        super.tearDown()
+    } 
+  
+    func testConfigIsInitialized() {
+        XCTAssertNotNil(Config.shared.properties)
     }
-
-    func testExample() {
-        // This is an example of a functional test case.
-        // Use XCTAssert and related functions to verify your tests produce the correct results.
+    
+    func testDevelopmentKeyIsObject() {
+        let data:[String:Bool]? = Config.shared.development.parse()
+        XCTAssertEqual(data,["debug":true])
     }
-
-    func testPerformanceExample() {
-        // This is an example of a performance test case.
-        self.measure {
-            // Put the code you want to measure the time of here.
-        }
+    
+    func testDebugKeyIsObject() {
+        let data:Bool? = Config.shared.development.debug.parse()
+        XCTAssertEqual(data,true)
     }
-
+    
+    func testApplicationTypeIsInteger() {
+        let data:Int? = Config.shared.application.type.parse()
+        XCTAssertEqual(data,5)
+    }
+    
+    func testApplicationVersionIsDouble() {
+        let data:Double? = Config.shared.application.version.parse()
+        XCTAssertEqual(data,1.2)
+    }
+    
+    func testApplicationKeyIsString() {
+        let data:String? = Config.shared.application.appKey.parse()
+        XCTAssertEqual(data,"ABCD-EFGH-IJKLMNOPR")
+    }
+    
+    func testApplicationSecurityGroupsAreArray() {
+        let data:[Int]? = Config.shared.application.security.OAuth2.groups.parse()
+        XCTAssertEqual(data,[1,9,0,5])
+    }
+    
+    func testMainKeyIsNotExists() {
+        let data:String? = Config.shared.app.debug.parse()
+        XCTAssertNil(data)
+    }
+    
+    func testSubKeyIsNotExists() {
+        let data:String? = Config.shared.development.version.parse()
+        XCTAssertNil(data)
+    }
+    
+    func testParseWrongDataType() {
+        let wrongDataType:Int? = Config.shared.development.debug.parse()
+        let correctDataType:Bool? = Config.shared.development.debug.parse()
+        XCTAssertNil(wrongDataType)
+        XCTAssertNotNil(correctDataType)
+    }
+     
 }
