@@ -138,7 +138,7 @@ class ViewController: UIViewController {
 
 ## What is next?
 
-- [ ] Carthage
+- [x] Carthage
 - [ ] Swift 5.x 
 - [ ] Remote JSON 
 
