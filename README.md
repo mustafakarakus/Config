@@ -140,6 +140,7 @@ class ViewController: UIViewController {
 ## What is next?
 
 - [x] Carthage
+- [x] Swift Package Manager
 - [ ] Remote JSON 
 - [ ] Swift 5.x 
 
