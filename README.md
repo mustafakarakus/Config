@@ -136,6 +136,12 @@ class ViewController: UIViewController {
 
 ```
 
+## What is next?
+
+- [ ] Carthage
+- [ ] Swift 5.x 
+- [ ] Remote JSON 
+
 ## Contribution
 
 Anyone who would like to contribute to the project is more than welcome.
