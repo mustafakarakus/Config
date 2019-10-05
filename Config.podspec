@@ -1,7 +1,7 @@
 Pod::Spec.new do |spec|
 
   spec.name         = "Config"
-  spec.version      = "0.0.5"
+  spec.version      = "1.0.0"
   spec.summary      = "Use a JSON file as an app configuration, reach keys with dot notation, written in Swift"
 
   spec.description  = <<-DESC
