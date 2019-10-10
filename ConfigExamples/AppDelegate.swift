@@ -22,11 +22,11 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         // or
         
         // https://raw.githubusercontent.com/mustafakarakus/Config/master/ConfigExamples/config.json
-        // Live
+        /*
         if let url = URL(string: "your-JSON-Endpoint-URL"){
             Config.initialize(with: url)
         }
-        
+        */
         return true
     }
     
