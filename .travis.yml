@@ -4,5 +4,5 @@ xcode_workspace: Config.xcworkspace
 xcode_scheme: Config
 
 script: 
-    - xcodebuild clean build -sdk iphonesimulator -workspace Config.xcworkspace -scheme ConfigTests CODE_SIGN_IDENTITY="" CODE_SIGNING_REQUIRED=NO
+    - xcodebuild clean build -sdk iphonesimulator -workspace Config.xcworkspace -scheme Config CODE_SIGN_IDENTITY="" CODE_SIGNING_REQUIRED=NO
 
