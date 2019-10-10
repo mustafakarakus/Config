@@ -2,3 +2,6 @@ language: objective-c
 osx_image: xcode10.2
 xcode_workspace: Config.xcworkspace
 xcode_scheme: Config
+
+script:
+  - xcodebuild [DEFAULT_OPTIONS] CODE_SIGNING_REQUIRED=NO 
