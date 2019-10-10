@@ -41,8 +41,12 @@ public class Config {
     }
     
     private func readConfig(){
+        guard let url = Config.url else{
+            _ = JSON.errorWith(Messages.checkJSONFile)
+            return
+        }
         do {
-            let data = try Data(contentsOf: Config.url, options: .mappedIfSafe)
+            let data = try Data(contentsOf: url, options: .mappedIfSafe)
             if let response = try? JSONDecoder().decode(JSON.self, from: data) {
                 properties = response
             }else{

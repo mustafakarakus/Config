@@ -21,11 +21,7 @@ class ViewController: UIViewController {
         if let debug:Bool = Config.shared.development.debug.parse(){
             print(debug)
         }
-        
-        if let isLive:Bool = Config.shared.development.live.parse(){
-            print(isLive)
-        }
-        
+          
         if let application:[String:Any] = Config.shared.application.parse(){
             print(application)
         }
