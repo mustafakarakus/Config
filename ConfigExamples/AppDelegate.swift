@@ -15,7 +15,18 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     var window: UIWindow?
     
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
-        Config.initialize(configPath: "config.json")
+        
+        // Local
+        Config.initialize(with: "config.json")
+        
+        // or
+        
+        // https://raw.githubusercontent.com/mustafakarakus/Config/master/ConfigExamples/config.json
+        // Live
+        if let url = URL(string: "your-JSON-Endpoint-URL"){
+            Config.initialize(with: url)
+        }
+        
         return true
     }
     

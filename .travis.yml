@@ -1,5 +1,8 @@
 language: objective-c
-osx_image: xcode10.1
+osx_image: xcode10.2
 xcode_workspace: Config.xcworkspace
 xcode_scheme: Config
-xcode_sdk: iphonesimulator12.1
+
+script: 
+    - xcodebuild clean build -sdk iphonesimulator -workspace Config.xcworkspace -scheme Config CODE_SIGN_IDENTITY="" CODE_SIGNING_REQUIRED=NO
+

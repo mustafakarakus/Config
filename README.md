@@ -70,7 +70,17 @@ in *AppDelegate*, initialize your *config.json* first.
 import Config
 
 func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
-    Config.initialize(configPath: "config.json")
+    
+    // Local
+    Config.initialize(with: "config.json")
+
+    // or
+
+    // Live  
+    if let url = URL(string: "your-JSON-Endpoint-URL"){
+        Config.initialize(with: url)
+    }
+
     return true
 }
 
@@ -132,6 +142,12 @@ class ViewController: UIViewController {
         if let domainExceptions:[String] = Config.shared.application.security.domainExceptions.parse(){
             print(domainExceptions)
         }
+
+        //without parse() fuction, we can use the following option, or other pattern matching options.
+        let appKey = Config.shared.application.appKey
+        if case let .string(str) = appKey {
+            print("string value = \(str)")
+        }
         
     }
 }
@@ -143,8 +159,8 @@ class ViewController: UIViewController {
 
 - [x] Carthage
 - [x] Swift Package Manager
-- [ ] Remote JSON 
-- [ ] Swift 5.x 
+- [x] Remote JSON 
+- [x] Swift 5.x 
 
 ## Contribution
 
