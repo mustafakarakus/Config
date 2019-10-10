@@ -1,7 +1,15 @@
 language: objective-c
 osx_image: xcode10.2
 xcode_workspace: Config.xcworkspace
-xcode_scheme: Config
+xcode_scheme: ConfigTests
 
-script:
-  - xcodebuild [DEFAULT_OPTIONS] CODE_SIGNING_REQUIRED=NO 
+script: 
+
+  xctool
+  -workspace Config.xcworkspace
+  -scheme ConfigTests
+  build 
+  test
+  ONLY_ACTIVE_ARCH=NO
+  CODE_SIGN_IDENTITY=""
+  CODE_SIGNING_REQUIRED=NO
