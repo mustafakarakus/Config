@@ -22,6 +22,10 @@ class ViewController: UIViewController {
             print(debug)
         }
         
+        if let isLive:Bool = Config.shared.development.live.parse(){
+            print(isLive)
+        }
+        
         if let application:[String:Any] = Config.shared.application.parse(){
             print(application)
         }
@@ -48,6 +52,12 @@ class ViewController: UIViewController {
         
         if let domainExceptions:[String] = Config.shared.application.security.domainExceptions.parse(){
             print(domainExceptions)
+        }
+        
+        //without parse() fuction, we can use the following option, or other pattern matching options.
+        let appKey = Config.shared.application.appKey
+        if case let .string(str) = appKey {
+            print("string value = \(str)")
         }
         
     }

@@ -1,38 +1,31 @@
 //
-//  ConfigTests.swift
+//  LiveConfigTests.swift
 //  ConfigTests
 //
-//  Created by Mustafa Karakus on 03/10/2019.
+//  Created by Mustafa Karakus on 09/10/2019.
 //  Copyright © 2019 Mustafa Karakus. All rights reserved.
 //
 
 import XCTest
 @testable import Config
 
-class ConfigTests: XCTestCase {
+class LiveConfigTests: XCTestCase {
     
-    override func setUp() {
-        Config.initialize(configPath: "mainConfig.json")
+    override class func setUp() {
+        if let url = URL(string: Keys.SampleEndpointUrl){
+            Config.initialize(with: url)
+            Config.shared.reset() //to change singleton object's json, otherwise first XCTestCase will set the singleton object and source.
+        }
         super.setUp()
     }
-    
-    override func tearDown() {
+
+    override class func tearDown() {
         super.tearDown()
-    } 
-  
+    }
+    
     func testConfigIsInitialized() {
         XCTAssertNotNil(Config.shared.properties)
-    }
-    
-    func testDevelopmentKeyIsObject() {
-        let data:[String:Bool]? = Config.shared.development.parse()
-        XCTAssertEqual(data,["debug":true])
-    }
-    
-    func testDebugKeyIsObject() {
-        let data:Bool? = Config.shared.development.debug.parse()
-        XCTAssertEqual(data,true)
-    }
+    }  
     
     func testApplicationTypeIsInteger() {
         let data:Int? = Config.shared.application.type.parse()
@@ -70,5 +63,5 @@ class ConfigTests: XCTestCase {
         XCTAssertNil(wrongDataType)
         XCTAssertNotNil(correctDataType)
     }
-     
+    
 }
