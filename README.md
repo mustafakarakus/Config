@@ -72,10 +72,20 @@ import Config
 func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
     
     // Local
-    Config.initialize(with: "config.json")
+    Config.initialize(with: "config.json") 
+    return true
+}
 
-    // or
+```
 
+or
+
+```swift
+
+import Config
+
+func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
+     
     // Live  
     if let url = URL(string: "your-JSON-Endpoint-URL"){
         Config.initialize(with: url)
@@ -85,6 +95,7 @@ func application(_ application: UIApplication, didFinishLaunchingWithOptions lau
 }
 
 ```
+
 
 To reach your configuration in the app, you need to start with **Config.shared** then type your JSON keys with **dot notation** that described in JSON file. Last thing is call **.parse()** function.
 
