@@ -172,6 +172,7 @@ class ViewController: UIViewController {
 - [x] Swift Package Manager
 - [x] Remote JSON 
 - [x] Swift 5.x 
+- [] Property Wrappers
 
 ## Contribution
 
