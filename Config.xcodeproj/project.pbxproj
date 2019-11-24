@@ -7,6 +7,9 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		452455B9238B2E4F00B18151 /* JSONValue.swift in Sources */ = {isa = PBXBuildFile; fileRef = 452455B8238B2E4F00B18151 /* JSONValue.swift */; };
+		452455BB238B318B00B18151 /* PropertyWrapperViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 452455BA238B318B00B18151 /* PropertyWrapperViewController.swift */; };
+		452455BD238B351900B18151 /* PatternMatchingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 452455BC238B351900B18151 /* PatternMatchingViewController.swift */; };
 		45424D3F234691C80096337E /* Config.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 45424D35234691C80096337E /* Config.framework */; };
 		45424D56234691D80096337E /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45424D55234691D80096337E /* AppDelegate.swift */; };
 		45424D58234691D80096337E /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45424D57234691D80096337E /* ViewController.swift */; };
@@ -73,6 +76,9 @@
 /* Begin PBXFileReference section */
 		32DC7A1C33EC25BA238711E5 /* Pods_ConfigExamples.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_ConfigExamples.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		35363E3919E62A8FE7EA6F80 /* Pods-Config-ConfigTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Config-ConfigTests.release.xcconfig"; path = "Target Support Files/Pods-Config-ConfigTests/Pods-Config-ConfigTests.release.xcconfig"; sourceTree = "<group>"; };
+		452455B8238B2E4F00B18151 /* JSONValue.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JSONValue.swift; sourceTree = "<group>"; };
+		452455BA238B318B00B18151 /* PropertyWrapperViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PropertyWrapperViewController.swift; sourceTree = "<group>"; };
+		452455BC238B351900B18151 /* PatternMatchingViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PatternMatchingViewController.swift; sourceTree = "<group>"; };
 		45424D35234691C80096337E /* Config.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Config.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		45424D39234691C80096337E /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		45424D3E234691C80096337E /* ConfigTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = ConfigTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -165,6 +171,7 @@
 				45424D682346A2840096337E /* JSON.swift */,
 				45424D6A2346A3880096337E /* Extensions.swift */,
 				458BE21B2347FF9300920DEA /* Messages.swift */,
+				452455B8238B2E4F00B18151 /* JSONValue.swift */,
 			);
 			path = Config;
 			sourceTree = "<group>";
@@ -188,6 +195,8 @@
 			children = (
 				45424D55234691D80096337E /* AppDelegate.swift */,
 				45424D57234691D80096337E /* ViewController.swift */,
+				452455BA238B318B00B18151 /* PropertyWrapperViewController.swift */,
+				452455BC238B351900B18151 /* PatternMatchingViewController.swift */,
 				45424D6F2346A7ED0096337E /* config.json */,
 				45424D722346AC0A0096337E /* Support Files */,
 			);
@@ -461,6 +470,7 @@
 				458BE21C2347FF9300920DEA /* Messages.swift in Sources */,
 				45424D6B2346A3880096337E /* Extensions.swift in Sources */,
 				45424D692346A2840096337E /* JSON.swift in Sources */,
+				452455B9238B2E4F00B18151 /* JSONValue.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -481,6 +491,8 @@
 			buildActionMask = 2147483647;
 			files = (
 				45424D58234691D80096337E /* ViewController.swift in Sources */,
+				452455BB238B318B00B18151 /* PropertyWrapperViewController.swift in Sources */,
+				452455BD238B351900B18151 /* PatternMatchingViewController.swift in Sources */,
 				45424D56234691D80096337E /* AppDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

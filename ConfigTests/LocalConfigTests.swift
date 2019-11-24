@@ -72,4 +72,38 @@ class LocalConfigTests: XCTestCase {
         XCTAssertNotNil(correctDataType)
     }
     
+    func testStringSubscriptsWithDotNotation() {
+        let key = "application.security.OAuth2.groups"
+        let data:[Int]? = Config.shared[key]
+        XCTAssertEqual(data,[1,9,0,5])
+    }
+    
+    func testStringSubscriptsWithDotNotationWithWrongDatatype() {
+        let key = "application.security.OAuth2.groups"
+        let wrongDataType:Int? = Config.shared[key]
+        XCTAssertNil(wrongDataType)
+    }
+    
+    func testStringSubscriptsWithoutDotNotation() {
+        let key = "application-security-OAuth2-groups"
+        let data:[Int]? = Config.shared[key]
+        XCTAssertNil(data)
+    }
+    
+    func testStringSubscriptsWithEmptyString() {
+        let key = ""
+        let data:[Int]? = Config.shared[key]
+        XCTAssertNil(data)
+    }
+    
+    func testStringSubscriptsWithSpace() {
+        let key = " "
+        let data:[Int]? = Config.shared[key]
+        XCTAssertNil(data)
+    }
+    func testStringSubscriptsWithSingleDotWithoutKeys() {
+        let key = "."
+        let data:[Int]? = Config.shared[key]
+        XCTAssertNil(data)
+    }
 }
