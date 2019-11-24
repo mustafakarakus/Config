@@ -40,6 +40,19 @@ public class Config {
         return JSON.error(Messages.checkJSONFile)
     }
     
+    public subscript<T>(key: String) -> T? {
+        let splitChar = "."
+        if !key.contains(splitChar){
+            return nil
+        }
+        let subscripts = key.components(separatedBy: splitChar)
+        var data:JSON = self[dynamicMember: subscripts[0]]
+        for i in 1..<subscripts.count{
+            data = data[dynamicMember: subscripts[i]]
+        }
+        return data.parse()
+    }
+    
     private func readConfig(){
         guard let url = Config.url else{
             _ = JSON.errorWith(Messages.checkJSONFile)
