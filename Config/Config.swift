@@ -42,10 +42,12 @@ public class Config {
     
     public subscript<T>(key: String) -> T? {
         let splitChar = "."
-        if !key.contains(splitChar){
-            return nil
+        var subscripts:[String] = []
+        if key.contains(splitChar){
+            subscripts = key.components(separatedBy: splitChar)
+        }else{
+            subscripts.append(key)
         }
-        let subscripts = key.components(separatedBy: splitChar)
         var data:JSON = self[dynamicMember: subscripts[0]]
         for i in 1..<subscripts.count{
             data = data[dynamicMember: subscripts[i]]
