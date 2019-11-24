@@ -96,10 +96,60 @@ func application(_ application: UIApplication, didFinishLaunchingWithOptions lau
 
 ```
 
+You have 3 options to read your **.json** values, Choose the best way for you
 
-To reach your configuration in the app, you need to start with **Config.shared** then type your JSON keys with **dot notation** that described in JSON file. Last thing is call **.parse()** function.
+* Property Wrapper
+* Pattern Matching
+* In-Function
 
-Only thing that you need to know is *parse()* function is type inferred. That means you need to specify your data type in your variable/constant.
+### JSONValue Property Wrapper
+
+* Mark your variable with **@JSONValue("JSONKey")**
+
+```swift
+
+@JSONValue("application.security.OAuth2.groups")
+var groups: [Int] = [] 
+//In that case 'application.security.OAuth2.groups' data type is an Int array (read the sample JSON file above)
+
+```
+
+#### Examples
+
+```swift
+
+import Config
+
+class PropertyWrapperViewController: UIViewController {
+    
+    @JSONValue("application.security.OAuth2.groups")
+    var groups: [Int] = []
+    
+    @JSONValue("development")
+    var development: [String:Any]  = [:]
+    
+    @JSONValue("development.debug")
+    var isDebug: Bool = false
+    
+    @JSONValue("application.security.OAuth2.credentials.username")
+    var username: String = ""
+    
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        
+        print("groups: \(groups)")
+        print("development: \(development)")
+        print("debug mode: \(isDebug)")
+        print("OAuth2 username: \(username)") 
+    }
+    
+}
+```
+
+### In-Function
+
+* Start with **Config.shared** then type your JSON keys with **dot notation** that described in JSON file. Last thing is call **.parse()** 
+* Important, *parse()* function is type inferred. That means you need to specify your data type in your variable/constant.
 
 ```swift 
 
@@ -107,7 +157,15 @@ let myIntegerValue:Int = Config.shared.myKey.myIntegerValue.parse()
 
 ```
 
-## Examples
+```swift
+
+if let development:[String:Any] = Config.shared.development.parse(){
+    print(development)
+}
+
+```
+
+#### Examples
 
 ```swift
 
@@ -152,17 +210,66 @@ class ViewController: UIViewController {
         
         if let domainExceptions:[String] = Config.shared.application.security.domainExceptions.parse(){
             print(domainExceptions)
-        }
-
-        //without parse() fuction, we can use the following option, or other pattern matching options.
-        let appKey = Config.shared.application.appKey
-        if case let .string(str) = appKey {
-            print("string value = \(str)")
-        }
-        
+        }  
     }
 }
+```
 
+### Pattern Matching
+
+* Start with **Config.shared** then type your JSON keys with **dot notation** that described in JSON file. 
+* Use Swift's Pattern matching power with the following cases
+
+```
+.string(val)
+.int(val)
+.double(val)
+.bool(val)
+.object(val)
+.array(val) 
+```
+
+```swift
+
+let string = Config.shared.application.appKey
+if case let .string(val) = string {
+    print("app Key \(val)")
+}
+    
+```
+
+#### Examples
+
+```swift
+
+import Config
+
+class PatternMatchingViewController: UIViewController {
+    
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        
+        let string = Config.shared.application.appKey
+        if case let .string(val) = string {
+            print("app Key \(val)")
+        }
+        
+        let intArray = Config.shared.application.security.OAuth2.groups
+        if case let .array(val) = intArray {
+            print("groups: \(val)")
+        }
+        
+        let dictionary = Config.shared.application
+        if case let .object(val) = dictionary {
+            print("application: \(val)")
+        }
+        
+        let double = Config.shared.application.version
+        if case let .double(val) = double {
+            print("version: \(val)")
+        }
+    }  
+}
 
 ```
 
@@ -172,7 +279,7 @@ class ViewController: UIViewController {
 - [x] Swift Package Manager
 - [x] Remote JSON 
 - [x] Swift 5.x 
-- [ ] Property Wrappers
+- [x] Property Wrappers
 
 ## Contribution
 
