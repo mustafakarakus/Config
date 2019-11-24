@@ -29,8 +29,7 @@ class PropertyWrapperViewController: UIViewController {
         print("groups: \(groups)")
         print("development: \(development)")
         print("debug mode: \(isDebug)")
-        print("OAuth2 username: \(username)")
-        
+        print("OAuth2 username: \(username)") 
     }
     
 }

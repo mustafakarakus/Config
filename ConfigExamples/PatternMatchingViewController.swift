@@ -33,7 +33,6 @@ class PatternMatchingViewController: UIViewController {
         if case let .double(val) = double {
             print("version: \(val)")
         }
-        
     }
     
 }

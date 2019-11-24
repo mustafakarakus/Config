@@ -1,5 +1,5 @@
 //
-//  Feature.swift
+//  JSONValue.swift
 //  Config
 //
 //  Created by Mustafa Karakus on 23/11/2019.

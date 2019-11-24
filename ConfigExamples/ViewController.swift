@@ -48,8 +48,8 @@ class ViewController: UIViewController {
         
         if let domainExceptions:[String] = Config.shared.application.security.domainExceptions.parse(){
             print(domainExceptions)
-        } 
-        
+        }
     }
+    
 }
 
