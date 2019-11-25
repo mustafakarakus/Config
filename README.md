@@ -32,7 +32,7 @@ end
 
 ## Usage
 
-Create a desired config file in **JSON** format in your Xcode project. 
+Create a desired config file in **JSON** format in your Xcode project or use a web url that returns a **JSON** 
 
 ```JSON
 
@@ -65,20 +65,21 @@ Create a desired config file in **JSON** format in your Xcode project.
 
 in *AppDelegate*, initialize your *config.json* first.
 
+### Local JSON file
+
 ```swift
 
 import Config
 
 func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
-    
-    // Local
+
     Config.initialize(with: "config.json") 
     return true
 }
 
 ```
 
-or
+### Web URL JSON
 
 ```swift
 
@@ -86,7 +87,6 @@ import Config
 
 func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
      
-    // Live  
     if let url = URL(string: "your-JSON-Endpoint-URL"){
         Config.initialize(with: url)
     }
@@ -96,21 +96,21 @@ func application(_ application: UIApplication, didFinishLaunchingWithOptions lau
 
 ```
 
-You have 3 options to read your **.json** values, Choose the best way for you
+You have 3 options to read your **JSON** values, Choose the best way for you
 
 * Property Wrapper
 * Pattern Matching
 * In-Function
 
-### JSONValue Property Wrapper
+### 'JSONValue' Property Wrapper
 
 * Mark your variable with **@JSONValue("JSONKey")**
 
+*In that case 'application.security.OAuth2.groups' data type is an Int array (read the sample JSON file above)*
 ```swift
 
 @JSONValue("application.security.OAuth2.groups")
 var groups: [Int] = [] 
-//In that case 'application.security.OAuth2.groups' data type is an Int array (read the sample JSON file above)
 
 ```
 
