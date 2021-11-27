@@ -11,57 +11,46 @@ import XCTest
 
 class LiveConfigTests: XCTestCase {
     
-    override class func setUp() {
-        if let url = URL(string: Keys.SampleEndpointUrl){
-            Config.initialize(with: url)
-            Config.shared.reset() //to change singleton object's json, otherwise first XCTestCase will set the singleton object and source.
-        }
-        super.setUp()
-    }
-
-    override class func tearDown() {
-        super.tearDown()
-    }
-    
-    func testConfigIsInitialized() {
-        XCTAssertNotNil(Config.shared.properties)
-    }  
+    private var config = Config(with: URL(string: Keys.SampleEndpointUrl)!)
     
     func testApplicationTypeIsInteger() {
-        let data:Int? = Config.shared.application.type.parse()
-        XCTAssertEqual(data,5)
+        let data:Int? = config.application.type.value()
+        XCTAssertNotNil(data)
+        XCTAssertEqual(data, 5)
     }
     
     func testApplicationVersionIsDouble() {
-        let data:Double? = Config.shared.application.version.parse()
-        XCTAssertEqual(data,1.2)
+        let data:Double? = config.application.version.value()
+        XCTAssertNotNil(data)
+        XCTAssertEqual(data, 1.2)
     }
     
     func testApplicationKeyIsString() {
-        let data:String? = Config.shared.application.appKey.parse()
-        XCTAssertEqual(data,"ABCD-EFGH-IJKLMNOPR")
+        let data:String? = config.application.appKey.value()
+        XCTAssertNotNil(data)
+        XCTAssertEqual(data, "ABCD-EFGH-IJKLMNOPR")
     }
     
     func testApplicationSecurityGroupsAreArray() {
-        let data:[Int]? = Config.shared.application.security.OAuth2.groups.parse()
-        XCTAssertEqual(data,[1,9,0,5])
+        let data:[Int]? = config.application.security.OAuth2.groups.value()
+        XCTAssertNotNil(data)
+        XCTAssertEqual(data, [1,9,0,5])
     }
     
     func testMainKeyIsNotExists() {
-        let data:String? = Config.shared.app.debug.parse()
+        let data:String? = config.app.debug.value()
         XCTAssertNil(data)
     }
     
     func testSubKeyIsNotExists() {
-        let data:String? = Config.shared.development.version.parse()
+        let data:String? = config.development.version.value()
         XCTAssertNil(data)
     }
     
     func testParseWrongDataType() {
-        let wrongDataType:Int? = Config.shared.development.debug.parse()
-        let correctDataType:Bool? = Config.shared.development.debug.parse()
+        let wrongDataType:Int? = config.development.debug.value()
+        let correctDataType:Bool? = config.development.debug.value()
         XCTAssertNil(wrongDataType)
         XCTAssertNotNil(correctDataType)
     }
-    
 }

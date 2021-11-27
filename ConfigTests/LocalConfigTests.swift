@@ -11,99 +11,87 @@ import XCTest
 
 class LocalConfigTests: XCTestCase {
     
-    override class func setUp() {
-        Config.initialize(with: "mainConfig.json")
-        Config.shared.reset() //to change singleton object's json, otherwise first XCTestCase will set the singleton object and source.
-        super.setUp()
-    }
-    
-    override class func tearDown() {
-        super.tearDown()
-    }
-    
-    func testConfigIsInitialized() {
-        XCTAssertNotNil(Config.shared.properties)
-    }
+    private var config = Config(with: "mainConfig")
     
     func testDevelopmentKeyIsObject() {
-        let data:[String:Bool]? = Config.shared.development.parse()
-        XCTAssertEqual(data,["debug":true])
+        let data:[String:Bool]? = config.development.value()
+        XCTAssertEqual(data, ["debug":true])
     }
     
     func testDebugKeyIsBoolean() {
-        let data:Bool? = Config.shared.development.debug.parse()
-        XCTAssertEqual(data,true)
+        let data:Bool? = config.development.debug.value()
+        XCTAssertEqual(data, true)
     }
     
     func testApplicationTypeIsInteger() {
-        let data:Int? = Config.shared.application.type.parse()
-        XCTAssertEqual(data,5)
+        let data:Int? = config.application.type.value()
+        XCTAssertEqual(data, 5)
     }
     
     func testApplicationVersionIsDouble() {
-        let data:Double? = Config.shared.application.version.parse()
-        XCTAssertEqual(data,1.2)
+        let data:Double? = config.application.version.value()
+        XCTAssertEqual(data, 1.2)
     }
     
     func testApplicationKeyIsString() {
-        let data:String? = Config.shared.application.appKey.parse()
-        XCTAssertEqual(data,"ABCD-EFGH-IJKLMNOPR")
+        let data:String? = config.application.appKey.value()
+        XCTAssertEqual(data, "ABCD-EFGH-IJKLMNOPR")
     }
     
     func testApplicationSecurityGroupsAreArray() {
-        let data:[Int]? = Config.shared.application.security.OAuth2.groups.parse()
-        XCTAssertEqual(data,[1,9,0,5])
+        let data:[Int]? = config.application.security.OAuth2.groups.value()
+        XCTAssertEqual(data, [1,9,0,5])
     }
     
     func testMainKeyIsNotExists() {
-        let data:String? = Config.shared.app.debug.parse()
+        let data:String? = config.app.debug.value()
         XCTAssertNil(data)
     }
     
     func testSubKeyIsNotExists() {
-        let data:String? = Config.shared.development.version.parse()
+        let data:String? = config.development.version.value()
         XCTAssertNil(data)
     }
     
-    func testParseWrongDataType() {
-        let wrongDataType:Int? = Config.shared.development.debug.parse()
-        let correctDataType:Bool? = Config.shared.development.debug.parse()
+    func testTryParseWrongDataTypeShouldBeNil() {
+        let wrongDataType:Int? = config.development.debug.value()
+        let correctDataType:Bool? = config.development.debug.value()
         XCTAssertNil(wrongDataType)
         XCTAssertNotNil(correctDataType)
     }
     
-    func testStringSubscriptsWithDotNotation() {
+    func testStringSubscriptsWithDotNotationShouldHaveValidValue() {
         let key = "application.security.OAuth2.groups"
-        let data:[Int]? = Config.shared[key]
-        XCTAssertEqual(data,[1,9,0,5])
+        let data:[Int]? = config[key]
+        XCTAssertEqual(data, [1,9,0,5])
     }
     
-    func testStringSubscriptsWithDotNotationWithWrongDatatype() {
+    func testStringSubscriptsWithDotNotationWithWrongDatatypeShouldBeNil() {
         let key = "application.security.OAuth2.groups"
-        let wrongDataType:Int? = Config.shared[key]
+        let wrongDataType:Int? = config[key]
         XCTAssertNil(wrongDataType)
     }
     
-    func testStringSubscriptsWithoutDotNotation() {
+    func testStringSubscriptsWithWrongNotationShouldBeNil() {
         let key = "application-security-OAuth2-groups"
-        let data:[Int]? = Config.shared[key]
+        let data:[Int]? = config[key]
         XCTAssertNil(data)
     }
     
-    func testStringSubscriptsWithEmptyString() {
+    func testStringSubscriptsWithEmptyStringShouldBeNil() {
         let key = ""
-        let data:[Int]? = Config.shared[key]
+        let data:[Int]? = config[key]
         XCTAssertNil(data)
     }
     
-    func testStringSubscriptsWithSpace() {
+    func testStringSubscriptsWithSpaceShouldBeNil() {
         let key = " "
-        let data:[Int]? = Config.shared[key]
+        let data:[Int]? = config[key]
         XCTAssertNil(data)
     }
-    func testStringSubscriptsWithSingleDotWithoutKeys() {
+    func testStringSubscriptsWithSingleDotWithoutKeysShouldBeNil() {
         let key = "."
-        let data:[Int]? = Config.shared[key]
+        let data:[Int]? = config[key]
         XCTAssertNil(data)
     }
 }

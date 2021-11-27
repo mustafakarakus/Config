@@ -11,17 +11,10 @@ import XCTest
 
 class LocalConfigInvalidTests: XCTestCase {
     
-    override class func setUp() {
-        Config.initialize(with: "invalidConfig.json")
-        Config.shared.reset() //to change singleton object's json, otherwise first XCTestCase will set the singleton object and source.
-        super.setUp()
-    }
-    
-    override class func tearDown() {
-        super.tearDown()
-    }
+    private var config = Config(with: "invalidConfig")
     
     func testConfigIsInitialized() {
-        XCTAssertNil(Config.shared.properties)
+        let isDebug:Bool? = config.development.debug.value()
+        XCTAssertNil(isDebug)
     }
 }
