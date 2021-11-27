@@ -14,7 +14,7 @@ let package = Package(
         .target(
             name: "Config",
             dependencies: [],
-            path: "Sources",
+            path: "Sources/Config",
             exclude: [
                  "Info.plist"
             ]
@@ -22,7 +22,7 @@ let package = Package(
         .testTarget(
             name: "ConfigTests",
             dependencies: ["Config"],
-            path: "Tests",
+            path: "Tests/ConfigTests",
             exclude: [
                  "Info.plist"
             ]
