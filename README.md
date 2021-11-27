@@ -165,7 +165,7 @@ class ViewController: UIViewController {
     }
 }
 ```
-### 'JSONValue' Property Wrapper
+### JSONValue Property Wrapper
 
 * Mark your variable with Local JSON file name; **@JSONValue("my-json-file-name", "JSONKey")**
 
@@ -293,6 +293,42 @@ class PatternMatchingViewController: UIViewController {
     }
 }
 
+```
+
+### SwiftUI
+
+Config now supports SwiftUI. Using the **JSONValue** Property Wrapper in the SwiftUI variable will bind the data from your JSON source, local or remote.
+
+```swift
+import SwiftUI
+import Config
+
+struct ContentViewLocal: View {
+    
+    @JSONValue("my-config", "application.security.OAuth2.credentials.username")
+    var name: String = ""
+    
+    var body: some View {
+        Text(name)
+            .padding()
+    }
+}
+```
+
+```swift
+import SwiftUI
+import Config
+
+struct ContentViewRemote: View {
+    
+    @JSONValue(url: "https://raw.githubusercontent.com/mustafakarakus/Config/master/ConfigExamples/config.json", "application.appKey")
+    var appKey: String = ""
+    
+    var body: some View {
+        Text(appKey)
+            .padding()
+    }
+}
 ```
 
 ## What is next?
