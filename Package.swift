@@ -13,9 +13,17 @@ let package = Package(
     targets: [ 
         .target(
             name: "Config",
-            dependencies: []),
+            dependencies: [],
+            path: "Sources",
+            exclude: [
+                 "Info.plist"
+            ]),
         .testTarget(
             name: "ConfigTests",
-            dependencies: ["Config"]),
+            dependencies: ["Config"],
+            path: "Tests",
+            exclude: [
+                 "Info.plist"
+            ]),),
     ]
 )
