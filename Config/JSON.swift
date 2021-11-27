@@ -9,7 +9,7 @@
 import Foundation
 
 @dynamicMemberLookup
-public enum JSON  {
+public enum JSON {
     case string(String)
     case int(Int)
     case double(Double)
@@ -31,22 +31,22 @@ extension JSON : Decodable {
             .resolve(with: DecodingError.typeMismatch(JSON.self, DecodingError.Context(codingPath: container.codingPath, debugDescription: Messages.notValidJSON)))
     }
     
-    public func parse<T>()->T?{
+    public func value<T>() -> T? {
         return getValue(json: self) as? T
     }
     
     public subscript(key: String) -> JSON {
         if case .object(let dict) = self {
-            return dict[key] ?? JSON.errorWith("\(Messages.keyDoesNotExists) - '\(key)'")
+            return dict[key] ?? JSON.error("\(Messages.keyDoesNotExists) - '\(key)'")
         }
-        return JSON.errorWith(Messages.notValidJSON)
+        return JSON.error(Messages.notValidJSON)
     }
     
     public subscript(dynamicMember member: String) -> JSON {
         if case .object(let dict) = self {
-            return dict[member] ?? JSON.errorWith("\(Messages.keyDoesNotExists) - '\(member)'")
+            return dict[member] ?? JSON.error("\(Messages.keyDoesNotExists) - '\(member)'")
         }
-        return JSON.errorWith("\(Messages.cannotReach) - '\(member)'")
+        return JSON.error("\(Messages.cannotReach) - '\(member)'")
     }
     
     func getValue(json:JSON) -> Any {
@@ -67,9 +67,19 @@ extension JSON : Decodable {
             return JSON.error
         }
     }
-    
-    static func errorWith(_ message:String)->JSON{
-        print(message)
-        return JSON.error(message)
+}
+
+extension JSON {
+    public var intValue: Int? {
+        return getValue(json: self) as? Int
+    }
+    public var stringValue: String? {
+        return getValue(json: self) as? String
+    }
+    public var boolValue: Bool? {
+        return getValue(json: self) as? Bool
+    }
+    public var doubleValue: Double? {
+        return getValue(json: self) as? Double
     }
 }
