@@ -8,20 +8,23 @@
 
 import UIKit
 import Config
-
+ 
 class PropertyWrapperViewController: UIViewController {
-    
-    @JSONValue("application.security.OAuth2.groups")
+     
+    @JSONValue("my-config", "application.security.OAuth2.groups")
     var groups: [Int] = []
     
-    @JSONValue("development")
+    @JSONValue("my-config1", "development")
     var development: [String:Any]  = [:]
     
-    @JSONValue("development.debug")
+    @JSONValue("my-config", "development.debug")
     var isDebug: Bool = false
     
-    @JSONValue("application.security.OAuth2.credentials.username")
+    @JSONValue("my-config", "application.security.OAuth2.credentials.username")
     var username: String = ""
+    
+    @JSONValue(url: "https://raw.githubusercontent.com/mustafakarakus/Config/master/ConfigExamples/config.json", "application.appKey")
+    var appKey: String = ""
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -29,7 +32,7 @@ class PropertyWrapperViewController: UIViewController {
         print("groups: \(groups)")
         print("development: \(development)")
         print("debug mode: \(isDebug)")
-        print("OAuth2 username: \(username)") 
+        print("OAuth2 username: \(username)")
+        print("App Key: \(appKey)") 
     }
-    
 }

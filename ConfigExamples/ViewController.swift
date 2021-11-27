@@ -14,42 +14,42 @@ class ViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        if let development:[String:Any] = Config.shared.development.parse(){
+        let config = Config(with: "my-config")
+
+        if let development:[String:Any] = config.development.value() {
             print(development)
         }
         
-        if let debug:Bool = Config.shared.development.debug.parse(){
+        if let debug:Bool = config.development.debug.value(){
             print(debug)
         }
           
-        if let application:[String:Any] = Config.shared.application.parse(){
+        if let application:[String:Any] = config.application.value(){
             print(application)
         }
         
-        if let version:Double = Config.shared.application.version.parse(){
+        if let version:Double = config.application.version.value(){
             print(version)
         }
         
-        if let applicationType:Int = Config.shared.application.type.parse(){
+        if let applicationType:Int = config.application.type.value(){
             print(applicationType)
         }
         
-        if let appKey:String = Config.shared.application.appKey.parse(){
+        if let appKey:String = config.application.appKey.value(){
             print(appKey)
         }
         
-        if let username:String = Config.shared.application.security.OAuth2.credentials.username.parse(){
+        if let username:String = config.application.security.OAuth2.credentials.username.value(){
             print(username)
         }
         
-        if let groups:[Int] = Config.shared.application.security.OAuth2.groups.parse(){
+        if let groups:[Int] = config.application.security.OAuth2.groups.value(){
             print(groups)
         }
         
-        if let domainExceptions:[String] = Config.shared.application.security.domainExceptions.parse(){
+        if let domainExceptions:[String] = config.application.security.domainExceptions.value(){
             print(domainExceptions)
         }
     }
-    
 }
-
