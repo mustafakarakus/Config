@@ -1,0 +1,16 @@
+{
+  "object": {
+    "pins": [
+      {
+        "package": "Config",
+        "repositoryURL": "https://github.com/mustafakarakus/Config.git",
+        "state": {
+          "branch": "improvements",
+          "revision": "45222bb4f52f680a2bd54389d2f584a8b354ef21",
+          "version": null
+        }
+      }
+    ]
+  },
+  "version": 1
+}
