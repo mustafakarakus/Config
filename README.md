@@ -11,19 +11,44 @@
 
   Config is a framework written in Swift that makes it easy for you to use JSON file as a configuration, with JSON keys in dot notation in your application. Also supports SwiftUI!
 
+
+## Table of contents
+- [Requirements](#requirements)
+- [Integration](#integration)
+  - [Swift Package Manager](#swift-package-manager)
+  - [CocoaPods](#cocoapods)
+- [Usage](#usage)
+  - [Instance](#usage-instance)
+  - [Property Wrapper](#usage-property-wrapper)
+  - [Pattern Matching](#usage-pattern-matching)
+- [SwiftUI](#swiftui)
+- [What is next?](#what-is-next)
+- [Contribution](#contribution)
+- [License](#license)
+
+---
+
+<a name="requirements" />
+
 ## Requirements
 
 * iOS 15.0
 * Xcode 13.1
 * Swift 5.5
 
+<a name="integration" />
+
 ## Integration
+
+<a name="swift-package-manager" />
 
 ### Swift Package Manager
 
 - In Xcode, open `File > Add Packages`. 
 - Search **https://github.com/mustafakarakus/Config.git**
 - Config should be listed. Click `Add Package`
+
+<a name="cocoapods" />
 
 ### CocoaPods
 
@@ -36,6 +61,8 @@ target 'MyApp' do
     pod 'Config'
 end
 ```
+
+<a name="usage" />
 
 ## Usage
 
@@ -75,6 +102,8 @@ You have 3 options to read your **JSON** values, Choose the best way for you
 * Instance
 * Property Wrapper
 * Pattern Matching
+
+<a name="usage-instance" />
 
 ### Instance
 
@@ -166,6 +195,9 @@ class ViewController: UIViewController {
     }
 }
 ```
+
+<a name="usage-property-wrapper" />
+
 ### JSONValue Property Wrapper
 
 * Mark your variable with Local JSON file name; **@JSONValue("my-json-file-name", "JSONKey")**
@@ -224,6 +256,8 @@ class PropertyWrapperViewController: UIViewController {
     }
 }
 ```
+
+<a name="usage-pattern-matching" />
 
 ### Pattern Matching
 
@@ -296,6 +330,8 @@ class PatternMatchingViewController: UIViewController {
 
 ```
 
+<a name="swiftui" />
+
 ### SwiftUI
 
 Config now supports SwiftUI. Using the **JSONValue** Property Wrapper in the SwiftUI variable will bind the data from your JSON source, local or remote.
@@ -332,6 +368,8 @@ struct ContentViewRemote: View {
 }
 ```
 
+<a name="what-is-next" />
+
 ## What is next?
 
 - [x] Carthage
@@ -342,6 +380,8 @@ struct ContentViewRemote: View {
 - [x] Use instance instead of Singleton
 - [x] SwiftUI
 
+<a name="contribution" />
+
 ## Contribution
 
 Anyone who would like to contribute to the project is more than welcome.
@@ -350,6 +390,7 @@ Anyone who would like to contribute to the project is more than welcome.
 * Make your changes
 * Submit pull request
 
+<a name="license" />
 
 ## License
 
