@@ -1,5 +1,5 @@
-language: objective-c
-osx_image: xcode11.1
+language: swift
+osx_image: xcode13.1
 xcode_workspace: Config.xcworkspace
 xcode_scheme: Config
 
