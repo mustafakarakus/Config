@@ -1,6 +1,0 @@
-framework module Pods_Config_ConfigTests {
-  umbrella header "Pods-Config-ConfigTests-umbrella.h"
-
-  export *
-  module * { export * }
-}

@@ -2,21 +2,53 @@
 
 [![Build Status](https://travis-ci.org/mustafakarakus/Config.svg?branch=master)](https://travis-ci.org/mustafakarakus/Config)
 [![Codebeat](https://codebeat.co/badges/7ab7f216-59bb-430b-9791-fab438fb3c05)](https://codebeat.co/projects/github-com-mustafakarakus-config-master)
-[![Swift 5](https://img.shields.io/badge/Swift-5.0-orange.svg?style=flat)](https://developer.apple.com/swift/)
+[![SwiftUI](https://img.shields.io/badge/SwiftUI-blue.svg?style=flat)](https://developer.apple.com/swiftui/)
+[![Swift 5](https://img.shields.io/badge/Swift-5.5-orange.svg?style=flat)](https://developer.apple.com/swift/)
 [![CocoaPods](https://img.shields.io/cocoapods/v/Config.svg)](https://cocoapods.org/pods/Config)
 [![Swift Package Manager](https://img.shields.io/badge/SPM-compatible-brightgreen.svg)](https://github.com/apple/swift-package-manager)
 [![Carthage](https://img.shields.io/badge/Carthage-compatible-4BC51D.svg?style=flat)](https://github.com/Carthage/Carthage)
 [![License](https://img.shields.io/badge/license-MIT-blue.svg?style=flat)](LICENSE)
 
-  Config is a framework written in Swift that makes it easy for you to use JSON file as a configuration, with JSON keys in dot notation in your application.
+  Config is a framework written in Swift that makes it easy for you to use JSON file as a configuration, with JSON keys in dot notation in your application. Also supports SwiftUI!
+
+
+## Table of contents
+- [Requirements](#requirements)
+- [Integration](#integration)
+  - [Swift Package Manager](#swift-package-manager)
+  - [CocoaPods](#cocoapods)
+- [Usage](#usage)
+  - [Instance](#usage-instance)
+  - [Property Wrapper](#usage-property-wrapper)
+  - [Pattern Matching](#usage-pattern-matching)
+- [SwiftUI](#swiftui)
+- [What is next?](#what-is-next)
+- [Contribution](#contribution)
+- [License](#license)
+
+---
+
+<a name="requirements" />
 
 ## Requirements
 
-* iOS 10.0+
-* Xcode 10.2+
-* Swift 5
+* iOS 15.0
+* Xcode 13.1
+* Swift 5.5
+
+<a name="integration" />
 
 ## Integration
+
+<a name="swift-package-manager" />
+
+### Swift Package Manager
+
+- In Xcode, open `File > Add Packages`. 
+- Search **https://github.com/mustafakarakus/Config.git**
+- Config should be listed. Click `Add Package`
+
+<a name="cocoapods" />
 
 ### CocoaPods
 
@@ -30,6 +62,8 @@ target 'MyApp' do
 end
 ```
 
+<a name="usage" />
+
 ## Usage
 
 Create a desired config file in **JSON** format in your Xcode project or use a web url that returns a **JSON** 
@@ -42,8 +76,8 @@ Create a desired config file in **JSON** format in your Xcode project or use a w
     },
     "application": {
         "type":5,
-        "version": 1.2,
-        "appKey": "ABCD-EFGH-IJKLMNOPR",
+        "version":1.2,
+        "appKey":"ABCD-EFGH-IJKLMNOPR",
         "security":{
             "OAuth2":{
                 "credentials":{
@@ -63,108 +97,53 @@ Create a desired config file in **JSON** format in your Xcode project or use a w
 
 ```
 
-in *AppDelegate*, initialize your *config.json* first.
-
-### Local JSON file
-
-```swift
-
-import Config
-
-func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
-
-    Config.initialize(with: "config.json") 
-    return true
-}
-
-```
-
-### Web URL JSON
-
-```swift
-
-import Config
-
-func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
-     
-    if let url = URL(string: "your-JSON-Endpoint-URL"){
-        Config.initialize(with: url)
-    }
-
-    return true
-}
-
-```
-
 You have 3 options to read your **JSON** values, Choose the best way for you
 
+* Instance
 * Property Wrapper
 * Pattern Matching
-* In-Function
 
-### 'JSONValue' Property Wrapper
+<a name="usage-instance" />
 
-* Mark your variable with **@JSONValue("JSONKey")**
+### Instance
 
-*In that case 'application.security.OAuth2.groups' data type is an Int array (read the sample JSON file above)*
-```swift
+* Initialize **Config** with the JSON file that exists in your directories. Or Use a JSON URL while initializing.
 
-@JSONValue("application.security.OAuth2.groups")
-var groups: [Int] = [] 
+**Local File**
 
-```
-
-#### Examples
+Add `my-config.json` file in the desired project directory
 
 ```swift
 
-import Config
+let config = Config(with: "my-config")
 
-class PropertyWrapperViewController: UIViewController {
-    
-    @JSONValue("application.security.OAuth2.groups")
-    var groups: [Int] = []
-    
-    @JSONValue("development")
-    var development: [String:Any]  = [:]
-    
-    @JSONValue("development.debug")
-    var isDebug: Bool = false
-    
-    @JSONValue("application.security.OAuth2.credentials.username")
-    var username: String = ""
-    
-    override func viewDidLoad() {
-        super.viewDidLoad()
-        
-        print("groups: \(groups)")
-        print("development: \(development)")
-        print("debug mode: \(isDebug)")
-        print("OAuth2 username: \(username)") 
-    }
-    
-}
 ```
 
-### In-Function
+**Remote File**
 
-* Start with **Config.shared** then type your JSON keys with **dot notation** that described in JSON file. Last thing is call **.parse()** 
-* Important, *parse()* function is type inferred. That means you need to specify your data type in your variable/constant.
+Use a URL for your JSON file that exists on remote.
+
+```swift
+
+let config = Config(with: "https://raw.githubusercontent.com/mustafakarakus/Config/master/ConfigExamples/config.json")
+
+```
+
+* Type your JSON keys with **dot notation** that described in JSON file. Last thing is call **.value()** function. *value()* function is type inferred. That means you need to specify your data type in your variable/constant.
 
 ```swift 
 
-let myIntegerValue:Int = Config.shared.myKey.myIntegerValue.parse()
+let myIntegerValue:Int = config.myKey.myIntegerValue.value() 
 
 ```
 
 ```swift
 
-if let development:[String:Any] = Config.shared.development.parse(){
+if let development:[String:Any] = config.development.value(){
     print(development)
 }
 
 ```
-
 #### Examples
 
 ```swift
@@ -176,48 +155,113 @@ class ViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        if let development:[String:Any] = Config.shared.development.parse(){
+        let config = Config(with: "my-config")
+
+        if let development:[String:Any] = config.development.value() {
             print(development)
         }
         
-        if let debug:Bool = Config.shared.development.debug.parse(){
+        if let debug:Bool = config.development.debug.value(){
             print(debug)
         }
-        
-        if let application:[String:Any] = Config.shared.application.parse(){
+          
+        if let application:[String:Any] = config.application.value(){
             print(application)
         }
         
-        if let version:Double = Config.shared.application.version.parse(){
+        if let version:Double = config.application.version.value(){
             print(version)
         }
         
-        if let applicationType:Int = Config.shared.application.type.parse(){
+        if let applicationType:Int = config.application.type.value(){
             print(applicationType)
         }
         
-        if let appKey:String = Config.shared.application.appKey.parse(){
+        if let appKey:String = config.application.appKey.value(){
             print(appKey)
         }
         
-        if let username:String = Config.shared.application.security.OAuth2.credentials.username.parse(){
+        if let username:String = config.application.security.OAuth2.credentials.username.value(){
             print(username)
         }
         
-        if let groups:[Int] = Config.shared.application.security.OAuth2.groups.parse(){
+        if let groups:[Int] = config.application.security.OAuth2.groups.value(){
             print(groups)
         }
         
-        if let domainExceptions:[String] = Config.shared.application.security.domainExceptions.parse(){
+        if let domainExceptions:[String] = config.application.security.domainExceptions.value(){
             print(domainExceptions)
-        }  
+        }
     }
 }
 ```
 
+<a name="usage-property-wrapper" />
+
+### JSONValue Property Wrapper
+
+* Mark your variable with Local JSON file name; **@JSONValue("my-json-file-name", "JSONKey")**
+
+or
+
+* Mark your variable with Remote JSON URL; **@JSONValue("http://www.mydomain.com/files/my-config.json", "JSONKey")**
+
+*In this case 'application.security.OAuth2.groups' data type is an Int array in 'my-config.json' file (read the sample JSON file above)*
+
+```swift
+
+@JSONValue("my-config", "application.security.OAuth2.groups")
+var groups: [Int] = [] 
+
+```
+
+```swift
+
+@JSONValue(url: "https://raw.githubusercontent.com/mustafakarakus/Config/master/ConfigExamples/config.json", "application.appKey")
+var appKey: String = ""
+
+```
+
+#### Examples
+
+```swift
+
+import Config
+
+class PropertyWrapperViewController: UIViewController {
+     
+    @JSONValue("my-config", "application.security.OAuth2.groups")
+    var groups: [Int] = []
+    
+    @JSONValue("my-config1", "development")
+    var development: [String:Any]  = [:]
+    
+    @JSONValue("my-config", "development.debug")
+    var isDebug: Bool = false
+    
+    @JSONValue("my-config", "application.security.OAuth2.credentials.username")
+    var username: String = ""
+    
+    @JSONValue(url: "https://raw.githubusercontent.com/mustafakarakus/Config/master/ConfigExamples/config.json", "application.appKey")
+    var appKey: String = ""
+    
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        
+        print("groups: \(groups)")
+        print("development: \(development)")
+        print("debug mode: \(isDebug)")
+        print("OAuth2 username: \(username)")
+        print("App Key: \(appKey)") 
+    }
+}
+```
+
+<a name="usage-pattern-matching" />
+
 ### Pattern Matching
 
-* Start with **Config.shared** then type your JSON keys with **dot notation** that described in JSON file. 
+* Create an instance of **Config** then type your JSON keys with **dot notation** that described in JSON file. 
 * Use Swift's Pattern matching power with the following cases
 
 ```
@@ -230,8 +274,13 @@ class ViewController: UIViewController {
 ```
 
 ```swift
+private var config: Config? {
+    let sampleUrl = "https://raw.githubusercontent.com/mustafakarakus/Config/master/ConfigExamples/config.json"
+    guard let url = URL(string: sampleUrl) else { return nil }
+    return Config(with: url)
+}
 
-let string = Config.shared.application.appKey
+let string = config?.application.appKey
 if case let .string(val) = string {
     print("app Key \(val)")
 }
@@ -246,32 +295,80 @@ import Config
 
 class PatternMatchingViewController: UIViewController {
     
+    private var config: Config? {
+        let sampleUrl = "https://raw.githubusercontent.com/mustafakarakus/Config/master/ConfigExamples/config.json"
+        guard let url = URL(string: sampleUrl) else { return nil }
+        return Config(with: url)
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-        
-        let string = Config.shared.application.appKey
+
+        let string = config?.application.appKey
         if case let .string(val) = string {
             print("app Key \(val)")
         }
         
-        let intArray = Config.shared.application.security.OAuth2.groups
-        if case let .array(val) = intArray {
-            print("groups: \(val)")
-        }
-        
-        let dictionary = Config.shared.application
-        if case let .object(val) = dictionary {
-            print("application: \(val)")
-        }
-        
-        let double = Config.shared.application.version
+        let double = config?.application.version
         if case let .double(val) = double {
             print("version: \(val)")
         }
-    }  
+        
+        let intArray = config?.application.security.OAuth2.groups
+        if case let .array(val) = intArray {
+            for item in val {
+                print("groups: \(String(describing: item.intValue))")
+            }
+        }
+
+        let dictionary = config?.application
+        if case let .object(val) = dictionary {
+            print("application: \(val)")
+        }
+    }
 }
 
 ```
+
+<a name="swiftui" />
+
+### SwiftUI
+
+Config now supports SwiftUI. Using the **JSONValue** Property Wrapper in the SwiftUI variable will bind the data from your JSON source, local or remote.
+
+```swift
+import SwiftUI
+import Config
+
+struct ContentViewLocal: View {
+    
+    @JSONValue("my-config", "application.security.OAuth2.credentials.username")
+    var name: String = ""
+    
+    var body: some View {
+        Text(name)
+            .padding()
+    }
+}
+```
+
+```swift
+import SwiftUI
+import Config
+
+struct ContentViewRemote: View {
+    
+    @JSONValue(url: "https://raw.githubusercontent.com/mustafakarakus/Config/master/ConfigExamples/config.json", "application.appKey")
+    var appKey: String = ""
+    
+    var body: some View {
+        Text(appKey)
+            .padding()
+    }
+}
+```
+
+<a name="what-is-next" />
 
 ## What is next?
 
@@ -280,6 +377,10 @@ class PatternMatchingViewController: UIViewController {
 - [x] Remote JSON 
 - [x] Swift 5.x 
 - [x] Property Wrappers
+- [x] Use instance instead of Singleton
+- [x] SwiftUI
+
+<a name="contribution" />
 
 ## Contribution
 
@@ -289,12 +390,13 @@ Anyone who would like to contribute to the project is more than welcome.
 * Make your changes
 * Submit pull request
 
+<a name="license" />
 
 ## License
 
 MIT License
 
-Copyright (c) 2019 mustafakarakus
+Copyright (c) 2021 mustafakarakus
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal
