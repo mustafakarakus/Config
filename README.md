@@ -12,11 +12,17 @@
 
 ## Requirements
 
-* iOS 15.0+
-* Xcode 13.1+
-* Swift 5+
+* iOS 15.0
+* Xcode 13.1
+* Swift 5.5
 
 ## Integration
+
+### Swift Package Manager
+
+- In Xcode, open `File > Add Packages`. 
+- Search **https://github.com/mustafakarakus/Config.git**
+- Config should be listed. Click `Add Package`
 
 ### CocoaPods
 
@@ -297,6 +303,7 @@ class PatternMatchingViewController: UIViewController {
 - [x] Swift 5.x 
 - [x] Property Wrappers
 - [x] Use instance instead of Singleton
+- [x] SwiftUI
 
 ## Contribution
 
