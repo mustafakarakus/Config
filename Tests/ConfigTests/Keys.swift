@@ -9,6 +9,6 @@
 import Foundation
 
 struct Keys {
-    public static let SampleEndpointUrl = "https://raw.githubusercontent.com/mustafakarakus/Config/master/ConfigExamples/config.json"
+    public static let SampleEndpointUrl = "https://raw.githubusercontent.com/mustafakarakus/Config/master/Tests/ConfigTests/ConfigFiles/mainConfig.json"
     public static let GoogleUrl = "https://www.google.com"
 }

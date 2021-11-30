@@ -125,7 +125,7 @@ Use a URL for your JSON file that exists on remote.
 
 ```swift
 
-let config = Config(with: "https://raw.githubusercontent.com/mustafakarakus/Config/master/ConfigExamples/config.json")
+let config = Config(with: "https://raw.githubusercontent.com/mustafakarakus/Config/master/Tests/ConfigTests/ConfigFiles/mainConfig.json")
 
 ```
 
@@ -217,7 +217,7 @@ var groups: [Int] = []
 
 ```swift
 
-@JSONValue(url: "https://raw.githubusercontent.com/mustafakarakus/Config/master/ConfigExamples/config.json", "application.appKey")
+@JSONValue(url: "https://raw.githubusercontent.com/mustafakarakus/Config/master/Tests/ConfigTests/ConfigFiles/mainConfig.json", "application.appKey")
 var appKey: String = ""
 
 ```
@@ -242,7 +242,7 @@ class PropertyWrapperViewController: UIViewController {
     @JSONValue("my-config", "application.security.OAuth2.credentials.username")
     var username: String = ""
     
-    @JSONValue(url: "https://raw.githubusercontent.com/mustafakarakus/Config/master/ConfigExamples/config.json", "application.appKey")
+    @JSONValue(url: "https://raw.githubusercontent.com/mustafakarakus/Config/master/Tests/ConfigTests/ConfigFiles/mainConfig.json", "application.appKey")
     var appKey: String = ""
     
     override func viewDidLoad() {
@@ -275,7 +275,7 @@ class PropertyWrapperViewController: UIViewController {
 
 ```swift
 private var config: Config? {
-    let sampleUrl = "https://raw.githubusercontent.com/mustafakarakus/Config/master/ConfigExamples/config.json"
+    let sampleUrl = "https://raw.githubusercontent.com/mustafakarakus/Config/master/Tests/ConfigTests/ConfigFiles/mainConfig.json"
     guard let url = URL(string: sampleUrl) else { return nil }
     return Config(with: url)
 }
@@ -358,7 +358,7 @@ import Config
 
 struct ContentViewRemote: View {
     
-    @JSONValue(url: "https://raw.githubusercontent.com/mustafakarakus/Config/master/ConfigExamples/config.json", "application.appKey")
+    @JSONValue(url: "https://raw.githubusercontent.com/mustafakarakus/Config/master/Tests/ConfigTests/ConfigFiles/mainConfig.json", "application.appKey")
     var appKey: String = ""
     
     var body: some View {
